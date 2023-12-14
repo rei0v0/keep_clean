@@ -1,0 +1,6 @@
+package com.example.keep_clean
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
