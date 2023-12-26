@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Keep Clean',
       theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.transparent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
