@@ -1,0 +1,66 @@
+{
+    "updated":" 2023-12-26",
+    "cleaning_tasks": [
+        {
+            "location": "キッチン",
+            "tasks": [
+                {
+                    "task": "フロアクリーニング",
+                    "last_updated": "2023-12-21",
+                    "cycle": "weekly"
+                },
+                {
+                    "task": "皿洗い",
+                    "last_updated": "2023-12-26",
+                    "cycle": "daily"
+                },
+                {
+                    "task": "countertop wiping",
+                    "last_updated": "2023-12-23",
+                    "cycle": "bi-weekly"
+                }
+            ]
+        },
+        {
+            "location": "リビング",
+            "tasks": [
+                {
+                    "task": "掃除機掛け",
+                    "last_updated": "2023-12-22",
+                    "cycle": "weekly"
+                },
+                {
+                    "task": "ゴミ捨て",
+                    "last_updated": "2023-12-21",
+                    "cycle": "monthly"
+                },
+                {
+                    "task": "窓拭き",
+                    "last_updated": "2023-12-20",
+                    "cycle": "bi-weekly"
+                }
+            ]
+        },
+
+        {
+            "location": "玄関",
+            "tasks": [
+                {
+                    "task": "靴ならべ",
+                    "last_updated": "2023-11-30",
+                    "cycle": "monthly"
+                },
+                {
+                    "task": "マット掃除",
+                    "last_updated": "2023-12-09",
+                    "cycle": "bi-weekly"
+                },
+                {
+                    "task": "掃き掃除",
+                    "last_updated": "2023-12-08",
+                    "cycle": "weekly"
+                }
+            ]
+        }
+    ]
+}
