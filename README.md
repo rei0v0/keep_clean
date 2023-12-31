@@ -1,20 +1,38 @@
-# keep_clean
+# Keep Clean🏠
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 概要
 
 # 使用技術
 
 [![My Skills](https://skillicons.dev/icons?i=flutter,firebase)](https://skillicons.dev)
+
+
+## 実装機能(ver1)
+
+## 実装予定機能
+
+## データベースの前提条件
++ 規模はそれほど大きくない
++ 複数端末でデータの共有可
++ サーバ側の開発にはコストを掛けない
++ iOS端末・Android端末の両方で同期が取れるようにする
+
+## データ形式
+サーバー型DB or JSON形式のいずれか
+### サーバー型DB
++ ユーザーのデータが必要になったときにその都度通信を行うので、同期問題は心配しなくてよい
++ オフラインでは使用できない
+
+### JSON形式
++ 形式としては手軽
++ データ量が増えると厳しい(Keep Cleanの場合はそれ程多くないため、耐えられるレベル)
++ 同期には一度サーバーを介してDBファイルとやりとりが必要
++ オフライン時でも使用できるが、オンラインになった時に同期する必要がある
++ コンフリクトの問題もある
+  
+## 使用するBaaS
+
+### Firebase
++ サーバー側にDBを提供している
++ 同期処理もSDKで行える
++ ユーザ認証機能もある
