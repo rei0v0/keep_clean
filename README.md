@@ -1,3 +1,4 @@
+![keep-clean-icon](https://github.com/rei0v0/keep_clean/assets/130533596/249cd9cd-e7ee-4a03-be8b-eb9cdc69de17)
 # Keep Clean🏠
 
 ### 概要
