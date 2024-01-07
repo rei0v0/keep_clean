@@ -58,7 +58,7 @@
                 {
                     "task": "掃き掃除",
                     "last_updated": "2023-12-08",
-                    "cycle": "weekly"
+                    "cycle": "daily"
                 }
             ]
         }
