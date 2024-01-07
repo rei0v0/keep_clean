@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/clening_list_page.dart';
+import 'package:keep_clean/setting_page.dart';
 
 void main() {
 
@@ -38,7 +39,7 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageIndex = ref.watch(pageIndexProvider);
-    final pages = [const CleaningListPage(), Center(child: Text("second page"),)];
+    final pages = [const CleaningListPage(), SettingPage()];
 
     return Scaffold(
       appBar: AppBar(

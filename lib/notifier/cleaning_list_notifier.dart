@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -12,7 +11,6 @@ final cleaningListProvider = StateNotifierProvider<CleaningListNotifier, Cleanin
 });
 
 class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
-
 
   final ScrollController scrollController = ScrollController();
   final double currentPosition = 0.0;
