@@ -1,16 +1,51 @@
-# keep_clean
+![keep-clean-icon](https://github.com/rei0v0/keep_clean/assets/130533596/249cd9cd-e7ee-4a03-be8b-eb9cdc69de17)
+# Keep Clean🏠
 
-A new Flutter project.
+### 概要
 
-## Getting Started
+# 使用技術
 
-This project is a starting point for a Flutter application.
+[![My Skills](https://skillicons.dev/icons?i=flutter,firebase)](https://skillicons.dev)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 実装機能(ver1)
++ 事前に掃除場所が設定されている（キッチン・リビング・お風呂・洗面台・玄関が設定されており、これらは削除不可）
++ 掃除場所ごとに掃除タスクを登録できる
++ 掃除場所を新たに作成できる
++ 掃除タスクを登録・削除できる
++ 掃除タスクごとに周期・説明を設定できる
++ 設定周期は毎日・2日に１回・3日に1回・週に1回・2週に1回・月に1回とする
++ タスクの後回しにできる（今日の掃除タスクを明日の掃除タスクに移動できる）
++ タスクの完了ボタンを押すと一覧から消える
+  
+## 実装予定機能
++ 複数の端末でデータを同期できる（家族で掃除タスクを共有することを想定している）
++ 掃除タスクを誰が担当しているのか設定できる
++ 定期実行の通知機能
++ 掃除タスクが完了したら通知を送る
+  
+## データベースの前提条件
++ 規模はそれほど大きくない
++ 複数端末でデータの共有可
++ サーバ側の開発にはコストを掛けない
++ iOS端末・Android端末の両方で同期が取れるようにする
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## データ形式
+サーバー型DB or JSON形式のいずれか
+### サーバー型DB
++ ユーザーのデータが必要になったときにその都度通信を行うので、同期問題は心配しなくてよい
++ オフラインでは使用できない
+
+### JSON形式
++ 形式としては手軽
++ データ量が増えると厳しい(Keep Cleanの場合はそれ程多くないため、耐えられるレベル)
++ 同期には一度サーバーを介してDBファイルとやりとりが必要
++ オフライン時でも使用できるが、オンラインになった時に同期する必要がある
++ コンフリクトの問題もある
+  
+## 使用するBaaS
+
+### Firebase
++ サーバー側にDBを提供している
++ 同期処理もSDKで行える
++ ユーザ認証機能もある
