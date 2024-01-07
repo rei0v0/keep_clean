@@ -15,7 +15,7 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
   final ScrollController scrollController = ScrollController();
   final double currentPosition = 0.0;
   String _data = "Load JSON Data";
-
+  List<Task> tasks = [];
   double topContainer = 0.0;
 
   CleaningListNotifier() : super(const CleaningListPageState()) {
@@ -44,7 +44,7 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
     String loadData = await rootBundle.loadString('asset/test_data.json');
     _data = loadData;
     var parsed = json.decode(_data);
-    List<Task> tasks = [];
+
 
     for (var locationData in parsed["cleaning_tasks"]) {
       String location = locationData["location"];
@@ -58,6 +58,15 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
         tasks.add(task);
       }
     }
+    state = state.copyWith(
+      overdueTasks: getOverdueTasks(tasks),
+      todayTasks: getDueTasks(tasks,0),
+      tomorrowTasks: getDueTasks(tasks,1),
+      threeDaysTasks: getDueTasks(tasks,3),
+    );
+  }
+
+  void reload(){
     state = state.copyWith(
       overdueTasks: getOverdueTasks(tasks),
       todayTasks: getDueTasks(tasks,0),
@@ -103,6 +112,15 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
 
   List<Task> getOverdueTasks(List<Task> tasks) {
     return tasks.where((task) => isOverdue(task)).toList();
+  }
+
+  void updateTask(Task task){
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final Task newTask = Task(name: task.name,location: task.location,lastUpdated: today, cycle: task.cycle);
+    tasks.remove(task);
+    tasks.add(newTask);
+    reload();
   }
 
   @override

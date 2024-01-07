@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/clening_list_page.dart';
 import 'package:keep_clean/setting_page.dart';
@@ -24,8 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Keep Clean',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        useMaterial3: false,
       ),
       home: const MyHomePage(),
     );
@@ -38,36 +39,68 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final pageIndex = ref.watch(pageIndexProvider);
+    final deviceSize = MediaQuery.of(context).size;
     final pages = [const CleaningListPage(), SettingPage()];
-
+    
     return Scaffold(
       appBar: AppBar(
-
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,     // for iOS
+          statusBarIconBrightness: Brightness.dark,  // for Android
+          statusBarColor: Colors.white,
+        ),
+        elevation: 0.0,
         backgroundColor: Colors.white,
-          title: const Text("Keep Clean"),
+        shadowColor: Colors.transparent,
+        title: const Text("Keep Clean",style: TextStyle(color: Colors.black),),
       ),
       body: pages[pageIndex],
 
 
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.blue,
-        onDestinationSelected: (int index){
-          ref.read(pageIndexProvider.notifier).state = index;
-        },
-        destinations: [
-          NavigationDestination(
-            selectedIcon: Icon(Icons.mail),
-            icon: Icon(Icons.mail_outline),
-            label: 'First',
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        decoration:  BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.egg),
-            icon: Icon(Icons.egg_outlined),
-            label: 'Second',
-          ),
-        ],
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
+        child: NavigationBar(
+          height: 70,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.greenAccent,
+          selectedIndex: pageIndex,
+          elevation: 0.0,
+          indicatorColor: Colors.transparent,
+          onDestinationSelected: (int index){
+            ref.read(pageIndexProvider.notifier).state = index;
+          },
+          destinations: const [
+            NavigationDestination(
+              selectedIcon: Icon(Icons.view_list, color: Colors.greenAccent,),
+              icon: Icon(Icons.view_list_sharp, color: Colors.grey,),
+              label: '掃除リスト',
+            ),
+            NavigationDestination(
 
+              selectedIcon: Icon(Icons.assignment, color: Colors.greenAccent,),
+              icon: Icon(Icons.assignment_outlined, color:Colors.grey,),
+              label: '設定',
+            ),
+          ],
+
+        ),
       ),
     );
   }
