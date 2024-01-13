@@ -14,11 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Location _$LocationFromJson(Map<String, dynamic> json) {
+  return _Location.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Location {
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<Task> get tasks => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LocationCopyWith<Location> get copyWith =>
       throw _privateConstructorUsedError;
@@ -29,7 +34,7 @@ abstract class $LocationCopyWith<$Res> {
   factory $LocationCopyWith(Location value, $Res Function(Location) then) =
       _$LocationCopyWithImpl<$Res, Location>;
   @useResult
-  $Res call({String name, List<Task> tasks});
+  $Res call({int? id, String name});
 }
 
 /// @nodoc
@@ -45,18 +50,18 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
-    Object? tasks = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      tasks: null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
     ) as $Val);
   }
 }
@@ -69,7 +74,7 @@ abstract class _$$LocationImplCopyWith<$Res>
       __$$LocationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<Task> tasks});
+  $Res call({int? id, String name});
 }
 
 /// @nodoc
@@ -83,42 +88,38 @@ class __$$LocationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
-    Object? tasks = null,
   }) {
     return _then(_$LocationImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      tasks: null == tasks
-          ? _value._tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$LocationImpl implements _Location {
-  const _$LocationImpl({required this.name, final List<Task> tasks = const []})
-      : _tasks = tasks;
+  const _$LocationImpl({this.id, required this.name});
 
+  factory _$LocationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LocationImplFromJson(json);
+
+  @override
+  final int? id;
   @override
   final String name;
-  final List<Task> _tasks;
-  @override
-  @JsonKey()
-  List<Task> get tasks {
-    if (_tasks is EqualUnmodifiableListView) return _tasks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
-  }
 
   @override
   String toString() {
-    return 'Location(name: $name, tasks: $tasks)';
+    return 'Location(id: $id, name: $name)';
   }
 
   @override
@@ -126,29 +127,39 @@ class _$LocationImpl implements _Location {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LocationImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(_tasks));
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
       __$$LocationImplCopyWithImpl<_$LocationImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LocationImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Location implements Location {
-  const factory _Location(
-      {required final String name, final List<Task> tasks}) = _$LocationImpl;
+  const factory _Location({final int? id, required final String name}) =
+      _$LocationImpl;
+
+  factory _Location.fromJson(Map<String, dynamic> json) =
+      _$LocationImpl.fromJson;
 
   @override
-  String get name;
+  int? get id;
   @override
-  List<Task> get tasks;
+  String get name;
   @override
   @JsonKey(ignore: true)
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
