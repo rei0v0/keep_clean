@@ -14,13 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Task _$TaskFromJson(Map<String, dynamic> json) {
+  return _Task.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Task {
-  String get location => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  int get locationId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get lastUpdated => throw _privateConstructorUsedError;
+  DateTime get nextDue => throw _privateConstructorUsedError;
   String get cycle => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
 }
@@ -30,7 +36,8 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String location, String name, DateTime lastUpdated, String cycle});
+  $Res call(
+      {int? id, int locationId, String name, DateTime nextDue, String cycle});
 }
 
 /// @nodoc
@@ -46,23 +53,28 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? location = null,
+    Object? id = freezed,
+    Object? locationId = null,
     Object? name = null,
-    Object? lastUpdated = null,
+    Object? nextDue = null,
     Object? cycle = null,
   }) {
     return _then(_value.copyWith(
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      locationId: null == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdated: null == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
+      nextDue: null == nextDue
+          ? _value.nextDue
+          : nextDue // ignore: cast_nullable_to_non_nullable
               as DateTime,
       cycle: null == cycle
           ? _value.cycle
@@ -79,7 +91,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$TaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String location, String name, DateTime lastUpdated, String cycle});
+  $Res call(
+      {int? id, int locationId, String name, DateTime nextDue, String cycle});
 }
 
 /// @nodoc
@@ -92,23 +105,28 @@ class __$$TaskImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? location = null,
+    Object? id = freezed,
+    Object? locationId = null,
     Object? name = null,
-    Object? lastUpdated = null,
+    Object? nextDue = null,
     Object? cycle = null,
   }) {
     return _then(_$TaskImpl(
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      locationId: null == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdated: null == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
+      nextDue: null == nextDue
+          ? _value.nextDue
+          : nextDue // ignore: cast_nullable_to_non_nullable
               as DateTime,
       cycle: null == cycle
           ? _value.cycle
@@ -119,28 +137,33 @@ class __$$TaskImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TaskImpl implements _Task {
   const _$TaskImpl(
-      {this.location = "unknown",
+      {this.id,
+      required this.locationId,
       this.name = "unknown",
-      required this.lastUpdated,
+      required this.nextDue,
       required this.cycle});
 
+  factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TaskImplFromJson(json);
+
   @override
-  @JsonKey()
-  final String location;
+  final int? id;
+  @override
+  final int locationId;
   @override
   @JsonKey()
   final String name;
   @override
-  final DateTime lastUpdated;
+  final DateTime nextDue;
   @override
   final String cycle;
 
   @override
   String toString() {
-    return 'Task(location: $location, name: $name, lastUpdated: $lastUpdated, cycle: $cycle)';
+    return 'Task(id: $id, locationId: $locationId, name: $name, nextDue: $nextDue, cycle: $cycle)';
   }
 
   @override
@@ -148,38 +171,51 @@ class _$TaskImpl implements _Task {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.locationId, locationId) ||
+                other.locationId == locationId) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated) &&
+            (identical(other.nextDue, nextDue) || other.nextDue == nextDue) &&
             (identical(other.cycle, cycle) || other.cycle == cycle));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, location, name, lastUpdated, cycle);
+      Object.hash(runtimeType, id, locationId, name, nextDue, cycle);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>
       __$$TaskImplCopyWithImpl<_$TaskImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TaskImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Task implements Task {
   const factory _Task(
-      {final String location,
+      {final int? id,
+      required final int locationId,
       final String name,
-      required final DateTime lastUpdated,
+      required final DateTime nextDue,
       required final String cycle}) = _$TaskImpl;
 
+  factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
+
   @override
-  String get location;
+  int? get id;
+  @override
+  int get locationId;
   @override
   String get name;
   @override
-  DateTime get lastUpdated;
+  DateTime get nextDue;
   @override
   String get cycle;
   @override

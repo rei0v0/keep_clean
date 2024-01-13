@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/main.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
-
 import 'package:keep_clean/model/task.dart';
 
 import 'notifier/setting_notifier.dart';

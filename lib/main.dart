@@ -2,15 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/clening_list_page.dart';
+import 'package:keep_clean/db/cleaningDB.dart';
+import 'package:keep_clean/model/location.dart';
 import 'package:keep_clean/setting_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
+  final prefs = await SharedPreferences.getInstance();
+  final isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
+
+  if (isFirstLaunch) {
+    await registerLocationsToDatabase();
+    await prefs.setBool('isFirstLaunch', false);
+  }
   runApp(
     const ProviderScope(
       child: MyApp(),
     ),
   );
+}
+
+Future<void> registerLocationsToDatabase() async{
+  final cleaningDatabase = CleaningDatabase.instance;
+  final locationNames = ["リビング","キッチン","浴室","トイレ","玄関"];
+  final List<Location> locations = locationNames.map((name){
+    final location = Location(name: name);
+    return location;
+  } ).toList();
+  for (var location in locations){
+    await cleaningDatabase.insertLocation(location);
+  }
 }
 
 
@@ -79,7 +102,7 @@ class MyHomePage extends ConsumerWidget {
         child: NavigationBar(
           height: 70,
           backgroundColor: Colors.transparent,
-          shadowColor: Colors.greenAccent,
+          shadowColor: Colors.lightBlueAccent,
           selectedIndex: pageIndex,
           elevation: 0.0,
           indicatorColor: Colors.transparent,
@@ -88,13 +111,13 @@ class MyHomePage extends ConsumerWidget {
           },
           destinations: const [
             NavigationDestination(
-              selectedIcon: Icon(Icons.view_list, color: Colors.greenAccent,),
+              selectedIcon: Icon(Icons.view_list, color: Colors.lightBlueAccent,),
               icon: Icon(Icons.view_list_sharp, color: Colors.grey,),
               label: '掃除リスト',
             ),
             NavigationDestination(
 
-              selectedIcon: Icon(Icons.assignment, color: Colors.greenAccent,),
+              selectedIcon: Icon(Icons.assignment, color: Colors.lightBlueAccent,),
               icon: Icon(Icons.assignment_outlined, color:Colors.grey,),
               label: '設定',
             ),
