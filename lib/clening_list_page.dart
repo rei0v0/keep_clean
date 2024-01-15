@@ -85,7 +85,7 @@ class CleaningListPage extends ConsumerWidget {
                       cleaningListNotifier.updateTask(tasks[index.index]);
                     },
                     borderRadius: BorderRadius.circular(20),
-                    backgroundColor: Colors.greenAccent,
+                    backgroundColor: Colors.lightBlueAccent,
                     foregroundColor:Colors.black,
                     icon: Icons.check,
                     label: '完了',
@@ -126,7 +126,7 @@ class CleaningListPage extends ConsumerWidget {
                               padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.greenAccent,
+                                  color: Colors.lightBlueAccent,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 width: 30,

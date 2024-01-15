@@ -50,9 +50,9 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
       String location = locationData["location"];
       for (var taskData in locationData["tasks"]) {
         Task task = Task(
-          location: location,
+          locationId: 0,
           name: taskData["task"],
-          lastUpdated: DateTime.parse(taskData["last_updated"]),
+          nextDue: DateTime.parse(taskData["last_updated"]),
           cycle: taskData["cycle"],
         );
         tasks.add(task);
@@ -91,7 +91,7 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
   }
 
   bool isDueWithin(Task task, int days) {
-    final nextDueDate = task.lastUpdated.add(Duration(days: cycleDays(task.cycle)));
+    final nextDueDate = task.nextDue.add(Duration(days: cycleDays(task.cycle)));
     print(task);
     print(nextDueDate);
     final now = DateTime.now();
@@ -100,7 +100,7 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
   }
 
   bool isOverdue(Task task) {
-    final nextDueDate = task.lastUpdated.add(Duration(days: cycleDays(task.cycle)));
+    final nextDueDate = task.nextDue.add(Duration(days: cycleDays(task.cycle)));
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     return nextDueDate.isBefore(today);
@@ -117,7 +117,7 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
   void updateTask(Task task){
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final Task newTask = Task(name: task.name,location: task.location,lastUpdated: today, cycle: task.cycle);
+    final Task newTask = Task(name: task.name,locationId: 9,nextDue: today, cycle: task.cycle);
     tasks.remove(task);
     tasks.add(newTask);
     reload();
