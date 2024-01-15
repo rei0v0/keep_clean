@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
 
 import 'package:keep_clean/model/task.dart';
+import 'package:keep_clean/task_list_page.dart';
 
 import 'notifier/setting_notifier.dart';
 
@@ -82,7 +83,10 @@ class SettingPage extends ConsumerWidget {
                       child: ElevatedButton(
                       onPressed: () {
                         // ボタンが押されたときの処理
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context)=> TaskListPage(settingList.locations[index - 1].name))
+                        );
 
                       },
 
@@ -189,7 +193,7 @@ class SettingPage extends ConsumerWidget {
                           child: CreateNameView()
                       ),
                       Container(
-                        SelectIconView()
+                        child : SelectIconView()
                       ),
                     ],
                   ),
