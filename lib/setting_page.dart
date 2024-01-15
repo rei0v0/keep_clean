@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keep_clean/add_task_view.dart';
 import 'package:keep_clean/main.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
@@ -42,9 +43,14 @@ class SettingPage extends ConsumerWidget {
                       color: Colors.black, // + ボタンのアイコンの色
                     ),
                     onPressed: () {
-                      //ref.read(countProvider.notifier).state += 1;
-
-                      // + ボタンが押されたときの処理をここに追加
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        isScrollControlled: true, // 画面半分よりも大きなモーダルの表示設定
+                        builder: (BuildContext context) {
+                          return AddTaskView();
+                        },
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       side: BorderSide(
