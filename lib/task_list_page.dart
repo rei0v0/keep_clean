@@ -20,7 +20,7 @@ class TaskListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('KBOYのFlutter大学'),
+        title: Text('aaa'),
       ),
       body: Container(
         color: Colors.red,
