@@ -10,10 +10,12 @@ _$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
     _$LocationImpl(
       id: json['id'] as int?,
       name: json['name'] as String,
+      iconName: json['iconName'] as String,
     );
 
 Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'iconName': instance.iconName,
     };

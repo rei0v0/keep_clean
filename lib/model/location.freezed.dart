@@ -22,6 +22,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
 mixin _$Location {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get iconName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $LocationCopyWith<$Res> {
   factory $LocationCopyWith(Location value, $Res Function(Location) then) =
       _$LocationCopyWithImpl<$Res, Location>;
   @useResult
-  $Res call({int? id, String name});
+  $Res call({int? id, String name, String iconName});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? iconName = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -61,6 +63,10 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      iconName: null == iconName
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -74,7 +80,7 @@ abstract class _$$LocationImplCopyWith<$Res>
       __$$LocationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String name});
+  $Res call({int? id, String name, String iconName});
 }
 
 /// @nodoc
@@ -90,6 +96,7 @@ class __$$LocationImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? iconName = null,
   }) {
     return _then(_$LocationImpl(
       id: freezed == id
@@ -100,6 +107,10 @@ class __$$LocationImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      iconName: null == iconName
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -107,7 +118,7 @@ class __$$LocationImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LocationImpl implements _Location {
-  const _$LocationImpl({this.id, required this.name});
+  const _$LocationImpl({this.id, required this.name, required this.iconName});
 
   factory _$LocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocationImplFromJson(json);
@@ -116,10 +127,12 @@ class _$LocationImpl implements _Location {
   final int? id;
   @override
   final String name;
+  @override
+  final String iconName;
 
   @override
   String toString() {
-    return 'Location(id: $id, name: $name)';
+    return 'Location(id: $id, name: $name, iconName: $iconName)';
   }
 
   @override
@@ -128,12 +141,14 @@ class _$LocationImpl implements _Location {
         (other.runtimeType == runtimeType &&
             other is _$LocationImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, iconName);
 
   @JsonKey(ignore: true)
   @override
@@ -150,8 +165,10 @@ class _$LocationImpl implements _Location {
 }
 
 abstract class _Location implements Location {
-  const factory _Location({final int? id, required final String name}) =
-      _$LocationImpl;
+  const factory _Location(
+      {final int? id,
+      required final String name,
+      required final String iconName}) = _$LocationImpl;
 
   factory _Location.fromJson(Map<String, dynamic> json) =
       _$LocationImpl.fromJson;
@@ -160,6 +177,8 @@ abstract class _Location implements Location {
   int? get id;
   @override
   String get name;
+  @override
+  String get iconName;
   @override
   @JsonKey(ignore: true)
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>

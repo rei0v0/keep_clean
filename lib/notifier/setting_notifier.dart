@@ -7,16 +7,16 @@ import 'package:keep_clean/repository/cleaning_repository.dart';
 import '../model/location.dart';
 import '../model/task.dart';
 
-final settingPageProvider = StateNotifierProvider<SettingNotifier, SettingPageState>((ref) {
+final settingPageProvider = StateNotifierProvider<SettingNotifier, List<Location>>((ref) {
   return SettingNotifier(CleaningRepository(CleaningDatabase.instance));
 });
 
-class SettingNotifier extends StateNotifier<SettingPageState> {
+class SettingNotifier extends StateNotifier<List<Location>> {
 
   String _data = "Load JSON Data";
   final CleaningRepository _cleaningRepository;
 
-  SettingNotifier(this._cleaningRepository) : super(const SettingPageState()) {
+  SettingNotifier(this._cleaningRepository) : super(const []) {
     _init();
   }
 
@@ -27,9 +27,11 @@ class SettingNotifier extends StateNotifier<SettingPageState> {
 
   Future<void> roadData() async {
     final locations = await _cleaningRepository.getLocations();
-    print(locations);
-    state = state.copyWith(locations: locations);
+    //print(locations);
+    state = locations;
   }
+
+  /*
   Future<void> loadJsonAsset() async {
     _data = "";
     String loadData = await rootBundle.loadString('asset/test_data.json');
@@ -55,4 +57,5 @@ class SettingNotifier extends StateNotifier<SettingPageState> {
       locations: locations
     );
   }
+   */
 }
