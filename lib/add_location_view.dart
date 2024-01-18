@@ -147,6 +147,9 @@ class AddButton extends ConsumerWidget {
     final controller = ref.watch(pageProvider);
     final pageIndex = ref.watch(indexProvider);
     final String locationName = ref.watch(locationNameProvider);
+    final int selectedSvg = ref.watch(svgProvider);
+    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","door","fork_spoon","hotpot","hotpot2","house","house2","house3","kitchen","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3"];
+
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +187,7 @@ class AddButton extends ConsumerWidget {
               controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease,);
               ref.read(indexProvider.notifier).state = 1;
             }else if(currentPage == 1){
-
+              Navigator.pop(context,{"name": locationName, "iconName": svgList[selectedSvg]});
             }
           },
           child: Container(

@@ -32,7 +32,8 @@ class SettingNotifier extends StateNotifier<List<Location>> {
   }
 
   Future<void> addLocation(Location location) async {
-    final locations = await _cleaningRepository.addLocation(location);
+    await _cleaningRepository.addLocation(location);
+
   }
 
   /*
