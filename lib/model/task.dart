@@ -6,7 +6,7 @@ part 'task.g.dart';
 class Task with _$Task {
 
   const factory Task({
-    int? id,
+    @JsonKey(name: '_id') int? id,
     required int locationId,
     @Default("unknown") String name,
     required DateTime nextDue,
@@ -14,6 +14,17 @@ class Task with _$Task {
   })  = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      TaskFields.locationId: locationId,
+      TaskFields.name: name,
+      TaskFields.nextDate: nextDue.toIso8601String(),
+      TaskFields.cycle: cycle,
+    };
+  }
+
 }
 
 class TaskFields {

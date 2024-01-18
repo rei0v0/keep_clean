@@ -7,6 +7,7 @@ class Location with _$Location {
   const factory Location({
     int? id,
     required String name,
+    required String iconName,
   })  = _Location;
 
   factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
@@ -16,6 +17,7 @@ class Location with _$Location {
 class LocationFields {
   static const String id = 'id';
   static const String name = 'name';
+  static const String iconName = 'iconName';
 }
 
 const String tableLocation = 'location';
