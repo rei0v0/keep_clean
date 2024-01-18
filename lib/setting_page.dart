@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/add_location_view.dart';
@@ -9,7 +11,9 @@ import 'package:keep_clean/model/task.dart';
 import 'package:keep_clean/task_list_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_clean/registration_list_page.dart';
+import 'model/location.dart';
 import 'notifier/setting_notifier.dart';
+
 
 
 
@@ -44,32 +48,38 @@ class SettingPage extends ConsumerWidget {
                   return SizedBox(
                     width: size.width/2-20,
                     height: (size.width/2-20)/2,
-                    child: GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: Colors.transparent,
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (BuildContext context) {
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          final result = await showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (BuildContext context) {
                             return AddLocationView();
-                          }
-                        );
-
-                      },
-                      child : Container(
-
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              spreadRadius: 1,
-                              blurRadius: 2,
-                              offset: Offset(1,1),
-                            )
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                              }
+                              );
+                          if(result != null){
+                            final location = Location(name: result["name"],iconName: result["iconName"]);
+                            ref.read(settingPageProvider.notifier).addLocation(location);
+                            ref.read(settingPageProvider.notifier).roadData();
+                          };
+                        },
+                        style: ElevatedButton.styleFrom(
+                          textStyle:  const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black54,
+                          ),
+                          fixedSize: Size(size.width/2-20,(size.width/2-20)/2),
+                          elevation: 10,
+                          shadowColor: Colors.black54,
+                          backgroundColor:  Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                         ),
+
+
+                      child : Container(
 
                         child: const Center(child: Icon(Icons.add,size: 50,color: Colors.black54)),
 
