@@ -12,8 +12,6 @@ class AddLocationView extends ConsumerWidget{
     super.key,
   });
 
-
-
   @override
   Widget build(BuildContext context,WidgetRef ref) {
 
@@ -99,13 +97,13 @@ class SelectSvgView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final int selectedSvg = ref.watch(svgProvider);
-    final List<String> svglist = ["bathtub","bathtub2","bathtub3","bed","bed2","door","fork_spoon","hotpot","hotpot2","house","house2","house3","kitchen","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3"];
+    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","door","fork_spoon","hotpot","hotpot2","house","house2","house3","kitchen","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3"];
 
     return Center(
       child: Wrap(
         spacing: 4.0,
         runSpacing: 4.0,
-        children: List.generate(svglist.length, (index){
+        children: List.generate(svgList.length, (index){
           return Container(
             width: 50,
             height: 50,
@@ -126,14 +124,10 @@ class SelectSvgView extends ConsumerWidget {
               ),
               child: SvgPicture.asset(
 
-                "asset/icon/"+svglist[index]+".svg",
+                "asset/icon/${svgList[index]}.svg",
                 width: 30,
                 height: 25,
-                color: index == selectedSvg ? const Color(0xff20b2aa) : Colors.grey,
-
-
-
-
+                colorFilter: ColorFilter.mode(index == selectedSvg ? const Color(0xff20b2aa) : Colors.grey, BlendMode.srcIn),
               ),
             ),
           );

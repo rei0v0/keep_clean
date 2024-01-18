@@ -21,4 +21,8 @@ class CleaningRepository {
     await _cleaningDatabase.insertTask(task);
   }
 
+  Future addLocation(Location location) async {
+    await _cleaningDatabase.insertLocation(location);
+  }
+
 }

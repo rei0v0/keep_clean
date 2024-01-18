@@ -31,6 +31,10 @@ class SettingNotifier extends StateNotifier<List<Location>> {
     state = locations;
   }
 
+  Future<void> addLocation(Location location) async {
+    final locations = await _cleaningRepository.addLocation(location);
+  }
+
   /*
   Future<void> loadJsonAsset() async {
     _data = "";
