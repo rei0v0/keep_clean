@@ -86,10 +86,8 @@ class SettingPage extends ConsumerWidget {
                       )
                     ),
                   );
-                }
-                else {
-                  return
-                    SizedBox(
+                } else {
+                  return SizedBox(
                       width: size.width/2-20,
                       height: (size.width/2-20)/2,
 
