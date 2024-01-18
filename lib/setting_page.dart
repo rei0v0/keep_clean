@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keep_clean/add_location_view.dart';
+import 'package:keep_clean/main.dart';
+import 'package:keep_clean/add_task_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:convert';
+import 'package:keep_clean/model/task.dart';
+import 'package:keep_clean/task_list_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_clean/registration_list_page.dart';
-
 import 'notifier/setting_notifier.dart';
 
 
@@ -39,8 +45,16 @@ class SettingPage extends ConsumerWidget {
                     width: size.width/2-20,
                     height: (size.width/2-20)/2,
                     child: GestureDetector(
-                      onTap: () async {
-                        showAddView(context);
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AddLocationView();
+                          }
+                        );
+
                       },
                       child : Container(
 
@@ -127,95 +141,8 @@ class SettingPage extends ConsumerWidget {
 
     );
   }
-
-  Future<dynamic> showAddView(BuildContext context) {
-    return showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Container(
-            width: MediaQuery.of(context).size.width, // スクリーンの幅に合わせる
-            height: MediaQuery.of(context).size.height*0.9,
-            alignment: Alignment.center, // テキストを中央に配置
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20,),
-                const Text("新しい場所を追加",style: TextStyle(fontSize:12,color: Colors.grey),),
-                const SizedBox(height: 20,),
-                Container(
-                  width: MediaQuery.of(context).size.width, // スクリーンの幅に合わせる
-                  height: 250,
-                  child: PageView(
-                    children: [
-                      Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-
-                          child: CreateNameView()
-                      ),
-                      Container(
-                       // SelectIconView()
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20,),
-                Container(
-                  width: 120,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Center(child: Text("追加",style: TextStyle(fontSize:15, fontWeight: FontWeight.bold,color: Colors.white),)),
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-    );
-  }
-
 }
 
-class SelectIconView extends StatelessWidget {
-  const SelectIconView({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Text("second page");
-  }
-}
 
-class CreateNameView extends StatelessWidget {
-  const CreateNameView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        autofocus: true,
-        decoration: InputDecoration(
-            hintText: 'キッチン'// 未入力時に表示されるテキスト
-        ),
-      ),
-    );
-  }
-}
 
