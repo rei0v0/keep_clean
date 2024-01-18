@@ -12,31 +12,13 @@ final cleaningListProvider = StateNotifierProvider<CleaningListNotifier, Cleanin
 
 class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
 
-  final ScrollController scrollController = ScrollController();
   final double currentPosition = 0.0;
   String _data = "Load JSON Data";
   List<Task> tasks = [];
   double topContainer = 0.0;
 
   CleaningListNotifier() : super(const CleaningListPageState()) {
-    _initScrollController();
-  }
-
-
-  void _initScrollController() async {
-    scrollController.addListener(_scrollListener);
-    await loadJsonAsset();
-  }
-  void _scrollListener() {
-
-    double value = scrollController.offset/100;
-    print("offset");
-    print(scrollController.offset);
-    print(value);
-    double positionRate =
-        scrollController.offset / scrollController.position.maxScrollExtent;
-    state = state.copyWith(topContainer: value, position: positionRate);
-
+    loadJsonAsset();
   }
 
   Future<void> loadJsonAsset() async {
@@ -123,11 +105,6 @@ class CleaningListNotifier extends StateNotifier<CleaningListPageState> {
     reload();
   }
 
-  @override
-  void dispose() {
-    scrollController.removeListener(_scrollListener);
-    scrollController.dispose();
-    super.dispose();
-  }
+
 
 }

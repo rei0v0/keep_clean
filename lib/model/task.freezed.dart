@@ -20,6 +20,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Task {
+  @JsonKey(name: '_id')
   int? get id => throw _privateConstructorUsedError;
   int get locationId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -37,7 +38,11 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
   $Res call(
-      {int? id, int locationId, String name, DateTime nextDue, String cycle});
+      {@JsonKey(name: '_id') int? id,
+      int locationId,
+      String name,
+      DateTime nextDue,
+      String cycle});
 }
 
 /// @nodoc
@@ -92,7 +97,11 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id, int locationId, String name, DateTime nextDue, String cycle});
+      {@JsonKey(name: '_id') int? id,
+      int locationId,
+      String name,
+      DateTime nextDue,
+      String cycle});
 }
 
 /// @nodoc
@@ -140,7 +149,7 @@ class __$$TaskImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskImpl implements _Task {
   const _$TaskImpl(
-      {this.id,
+      {@JsonKey(name: '_id') this.id,
       required this.locationId,
       this.name = "unknown",
       required this.nextDue,
@@ -150,6 +159,7 @@ class _$TaskImpl implements _Task {
       _$$TaskImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final int? id;
   @override
   final int locationId;
@@ -200,7 +210,7 @@ class _$TaskImpl implements _Task {
 
 abstract class _Task implements Task {
   const factory _Task(
-      {final int? id,
+      {@JsonKey(name: '_id') final int? id,
       required final int locationId,
       final String name,
       required final DateTime nextDue,
@@ -209,6 +219,7 @@ abstract class _Task implements Task {
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   int? get id;
   @override
   int get locationId;

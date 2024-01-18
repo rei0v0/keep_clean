@@ -26,11 +26,13 @@ void main() async{
 
 Future<void> registerLocationsToDatabase() async{
   final cleaningDatabase = CleaningDatabase.instance;
-  final locationNames = ["リビング","キッチン","浴室","トイレ","玄関"];
-  final List<Location> locations = locationNames.map((name){
-    final location = Location(name: name);
-    return location;
-  } ).toList();
+  final locationNames = {"リビング":"house","キッチン":"kitchen","浴室":"bathtub","トイレ":"toilet","玄関":"door"};
+  final iconNames = ["house","kitchen","bathtub","toilet","door"];
+
+  final List<Location> locations = locationNames.entries.map((entry) {
+    return Location(name: entry.key, iconName: entry.value);
+  }).toList();
+
   for (var location in locations){
     await cleaningDatabase.insertLocation(location);
   }

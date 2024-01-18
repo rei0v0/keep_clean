@@ -7,7 +7,7 @@ part of 'task.dart';
 // **************************************************************************
 
 _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
-      id: json['id'] as int?,
+      id: json['_id'] as int?,
       locationId: json['locationId'] as int,
       name: json['name'] as String? ?? "unknown",
       nextDue: DateTime.parse(json['nextDue'] as String),
@@ -16,7 +16,7 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
 
 Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'locationId': instance.locationId,
       'name': instance.name,
       'nextDue': instance.nextDue.toIso8601String(),
