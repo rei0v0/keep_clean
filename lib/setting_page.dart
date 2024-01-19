@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/add_location_view.dart';
@@ -45,7 +47,9 @@ class SettingPage extends ConsumerWidget {
                               isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
+
                             return const AddLocationView();
+
                               }
                               );
                           if(result != null){
@@ -53,6 +57,7 @@ class SettingPage extends ConsumerWidget {
                             ref.read(settingPageProvider.notifier).addLocation(location);
                             ref.read(settingPageProvider.notifier).roadData();
                           }
+
                         },
                         style: ElevatedButton.styleFrom(
                           textStyle:  const TextStyle(
@@ -67,8 +72,6 @@ class SettingPage extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
-
-
                       child : const Center(child: Icon(Icons.add,size: 50,color: Colors.orangeAccent))
                     ),
                   );
