@@ -18,7 +18,6 @@ class AddLocationView extends ConsumerWidget{
 
     final Size size = MediaQuery.of(context).size;
     final controller = ref.watch(pageProvider);
-    final String taskName = ref.watch(locationNameProvider);
     return GestureDetector(
 
       behavior: HitTestBehavior.opaque,
@@ -55,7 +54,7 @@ class AddLocationView extends ConsumerWidget{
             ],
           )
       ),
-    );;
+    );
   }
 }
 
@@ -104,7 +103,7 @@ class SelectSvgView extends ConsumerWidget {
         spacing: 4.0,
         runSpacing: 4.0,
         children: List.generate(svgList.length, (index){
-          return Container(
+          return SizedBox(
             width: 50,
             height: 50,
             child: TextButton(
@@ -147,6 +146,9 @@ class AddButton extends ConsumerWidget {
     final controller = ref.watch(pageProvider);
     final pageIndex = ref.watch(indexProvider);
     final String locationName = ref.watch(locationNameProvider);
+    final int selectedSvg = ref.watch(svgProvider);
+    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","door","fork_spoon","hotpot","hotpot2","house","house2","house3","kitchen","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3"];
+
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +186,7 @@ class AddButton extends ConsumerWidget {
               controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease,);
               ref.read(indexProvider.notifier).state = 1;
             }else if(currentPage == 1){
-
+              Navigator.pop(context,{"name": locationName, "iconName": svgList[selectedSvg]});
             }
           },
           child: Container(

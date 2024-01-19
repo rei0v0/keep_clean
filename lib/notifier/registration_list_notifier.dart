@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/model/task.dart';
 import '../db/cleaningDB.dart';
+import '../model/location.dart';
 import '../repository/cleaning_repository.dart';
 
 
@@ -35,5 +35,15 @@ class RegistrationListNotifier extends StateNotifier<List<Task>>{
   List<Task> filterTasksByCycle(String cycle) {
     return state.where((task) => task.cycle == cycle).toList();
   }
+
+  Future deleteTask(Task task) async {
+    await _cleaningRepository.deleteTask(task);
+  }
+
+  Future deleteLocation(Location location) async {
+    await _cleaningRepository.deleteLocation(location);
+  }
+
+
 
 }

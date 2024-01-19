@@ -1,4 +1,3 @@
-
 import 'package:keep_clean/model/location.dart';
 import 'package:keep_clean/model/task.dart';
 import 'package:path/path.dart';
@@ -29,8 +28,6 @@ class CleaningDatabase {
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const stringType = 'TEXT NOT NULL';
-    const doneType = 'INT NOT NULL';
-    const connectionIdType = 'INTEGER NOT NULL';
     const intType = 'INT NOT NULL';
 
     await db.execute('''
@@ -55,14 +52,19 @@ class CleaningDatabase {
 
   Future insertLocation(Location location) async {
     final db = await instance.database;
-    final id = await db.insert(tableLocation, location.toJson());
-    location.copyWith(id: id);
+    await db.insert(tableLocation, location.toJson());
   }
 
   Future<List<Location>> readAllLocations() async {
     final db = await instance.database;
     final result = await db.query(tableLocation);
     return result.map((json) => Location.fromJson(json)).toList();
+  }
+
+  Future<List<Task>> readAllTasks() async {
+    final db = await instance.database;
+    final result = await db.query(tableTask);
+    return result.map((json) => Task.fromJson(json)).toList();
   }
 
   Future<List<Task>> readTasksInLocation(int locationId) async {
@@ -79,16 +81,42 @@ class CleaningDatabase {
           WHERE $tableTask.${TaskFields.locationId} = ?
       ''', [locationId]);
 
-    print(result);
     final List<Task> tasks = result.map((json) => Task.fromJson(json)).toList();
-    //print(tasks);
     return tasks;
   }
 
-  Future insertTask(Task task) async {
+  Future<void> insertTask(Task task) async {
     final db = await instance.database;
-    final id = await db.insert(tableTask, task.toJson());
-    task.copyWith(id: id);
+    await db.insert(tableTask, task.toJson());
+
+  }
+
+  Future updateTask(Task task) async {
+    final database = await instance.database;
+    await database.update(
+        tableTask,
+        task.toJson(),
+        where: "${TaskFields.id}  = ?",
+        whereArgs: [task.id]
+    );
+  }
+
+  Future deleteTask(Task task) async {
+    final database = await instance.database;
+    await database.delete(
+        tableTask,
+        where: '${TaskFields.id} = ?',
+        whereArgs: [task.id]
+    );
+  }
+
+  Future deleteLocation(Location location) async {
+    final database = await instance.database;
+    await database.delete(
+        tableLocation,
+        where: '${LocationFields.id} = ?',
+        whereArgs: [location.id]
+    );
   }
 
 }

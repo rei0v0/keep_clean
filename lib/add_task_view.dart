@@ -16,7 +16,6 @@ class AddTaskView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final Size size = MediaQuery.of(context).size;
     final controller = ref.watch(pageProvider);
-    final String taskName = ref.watch(taskNameProvider);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -153,7 +152,6 @@ class SelectCycleView extends ConsumerWidget {
   }
 
   DateTime getNextWeekday(int weekday) {
-
     DateTime now = DateTime.now();
     int daysToAdd = (weekday - now.weekday + 7) % 7;
     DateTime nextWeekday = now.add(Duration(days: daysToAdd));
@@ -172,6 +170,7 @@ class AddButton extends ConsumerWidget {
     final pageIndex = ref.watch(indexProvider);
     final String taskName = ref.watch(taskNameProvider);
     final int selectedCycle = ref.watch(cycleProvider);
+    final DateTime initialDate = ref.watch(initialDateProvider);
     final List<String> cyclesInEnglish = [
       "Daily", "Bi-daily", "Tri-daily", "Weekly", "Bi-weekly", "Monthly",
       "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
@@ -212,7 +211,8 @@ class AddButton extends ConsumerWidget {
               controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease,);
               ref.read(indexProvider.notifier).state = 1;
             }else if(currentPage == 1){
-              Navigator.pop(context,{"name": taskName, "cycle": cyclesInEnglish[selectedCycle]});
+              final due = DateTime(initialDate.year, initialDate.month, initialDate.day);
+              Navigator.pop(context,{"name": taskName, "cycle": cyclesInEnglish[selectedCycle],"initialDate" : due});
             }
           },
           child: Container(

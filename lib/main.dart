@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:keep_clean/clening_list_page.dart';
 import 'package:keep_clean/db/cleaningDB.dart';
 import 'package:keep_clean/model/location.dart';
@@ -27,7 +28,6 @@ void main() async{
 Future<void> registerLocationsToDatabase() async{
   final cleaningDatabase = CleaningDatabase.instance;
   final locationNames = {"リビング":"house","キッチン":"kitchen","浴室":"bathtub","トイレ":"toilet","玄関":"door"};
-  final iconNames = ["house","kitchen","bathtub","toilet","door"];
 
   final List<Location> locations = locationNames.entries.map((entry) {
     return Location(name: entry.key, iconName: entry.value);
@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
       title: 'Keep Clean',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        fontFamily: "Noto Sans JP",
         useMaterial3: false,
       ),
       home: const MyHomePage(),
@@ -66,8 +67,7 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     
     final pageIndex = ref.watch(pageIndexProvider);
-    final deviceSize = MediaQuery.of(context).size;
-    final pages = [const CleaningListPage(), SettingPage()];
+    final pages = [const CleaningListPage(), const SettingPage()];
     
     return Scaffold(
       appBar: AppBar(
@@ -79,16 +79,29 @@ class MyHomePage extends ConsumerWidget {
         elevation: 0.0,
         backgroundColor: Colors.white,
         shadowColor: Colors.transparent,
-        title: const Text("Keep Clean",style: TextStyle(color: Colors.black),),
+        centerTitle: false,
+        title: Row(
+          children: [
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: SvgPicture.asset(
+                "asset/KeepCleanIcon.svg",
+              ),
+            ),
+            const SizedBox(width: 10,),
+            const Text("Keep Clean",style: TextStyle(color: Colors.black, fontSize: 22,fontFamily: "AbrilFatface"),)
+          ],
+        ),
       ),
       body: pages[pageIndex],
 
 
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        decoration:  BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration:  const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.only(
+          borderRadius:  BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
@@ -118,10 +131,9 @@ class MyHomePage extends ConsumerWidget {
               label: '掃除リスト',
             ),
             NavigationDestination(
-
               selectedIcon: Icon(Icons.assignment, color: Colors.lightBlueAccent,),
               icon: Icon(Icons.assignment_outlined, color:Colors.grey,),
-              label: '設定',
+              label: '掃除設定',
             ),
           ],
 

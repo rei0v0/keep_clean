@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/add_location_view.dart';
-import 'package:keep_clean/main.dart';
-import 'package:keep_clean/add_task_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:convert';
-import 'package:keep_clean/model/task.dart';
-import 'package:keep_clean/task_list_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_clean/registration_list_page.dart';
+import 'model/location.dart';
 import 'notifier/setting_notifier.dart';
+
 
 
 
@@ -20,11 +16,9 @@ class SettingPage extends ConsumerWidget {
   @override
 
   Widget build(BuildContext context, WidgetRef ref) {
-    //final count = ref.watch(countProvider);
+
     final locations = ref.watch(settingPageProvider);
     final Size size = MediaQuery.of(context).size;
-    final buttonsize_x=size.width/2-20;
-    final buttonsize_y=buttonsize_x/2;
     return Scaffold(
         backgroundColor: Colors.white,
         body: SizedBox(
@@ -44,36 +38,38 @@ class SettingPage extends ConsumerWidget {
                   return SizedBox(
                     width: size.width/2-20,
                     height: (size.width/2-20)/2,
-                    child: GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: Colors.transparent,
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AddLocationView();
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          final result = await showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (BuildContext context) {
+                            return const AddLocationView();
+                              }
+                              );
+                          if(result != null){
+                            final location = Location(name: result["name"],iconName: result["iconName"]);
+                            ref.read(settingPageProvider.notifier).addLocation(location);
+                            ref.read(settingPageProvider.notifier).roadData();
                           }
-                        );
-
-                      },
-                      child : Container(
-
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              spreadRadius: 1,
-                              blurRadius: 2,
-                              offset: Offset(1,1),
-                            )
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                        },
+                        style: ElevatedButton.styleFrom(
+                          textStyle:  const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black54,
+                          ),
+                          fixedSize: Size(size.width/2-20,(size.width/2-20)/2),
+                          elevation: 10,
+                          shadowColor: Colors.black54,
+                          backgroundColor:  Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                         ),
 
-                        child: const Center(child: Icon(Icons.add,size: 50,color: Colors.black54)),
 
-                      )
+                      child : const Center(child: Icon(Icons.add,size: 50,color: Colors.orangeAccent))
                     ),
                   );
                 }
@@ -87,7 +83,7 @@ class SettingPage extends ConsumerWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => RegistrationListPage(locations[index - 1].name, locations[index - 1].id ?? 1)),
+                          MaterialPageRoute(builder: (context) => RegistrationListPage(locations[index - 1])),
                         );
                       },
                       style: ElevatedButton.styleFrom(
