@@ -8,7 +8,6 @@ import 'package:keep_clean/add_task_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
 import 'package:keep_clean/model/task.dart';
-import 'package:keep_clean/task_list_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_clean/registration_list_page.dart';
 import 'model/location.dart';
@@ -27,7 +26,7 @@ class SettingPage extends ConsumerWidget {
     //final count = ref.watch(countProvider);
     final locations = ref.watch(settingPageProvider);
     final Size size = MediaQuery.of(context).size;
-    final buttonsize_x=size.width/2-20;
+    final buttonsize_x=size.width/2-10;
     final buttonsize_y=buttonsize_x/2;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -35,7 +34,7 @@ class SettingPage extends ConsumerWidget {
             width: size.width,
             height: size.height,
             child: GridView.builder(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(10),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 7 / 3,
                   crossAxisSpacing: 10.0,
@@ -46,7 +45,7 @@ class SettingPage extends ConsumerWidget {
               itemBuilder: (context, index) {
                 if(index==0){
                   return SizedBox(
-                    width: size.width/2-20,
+                    width: size.width/2,
                     height: (size.width/2-20)/2,
                     child: ElevatedButton(
                         onPressed: () async{
@@ -88,7 +87,7 @@ class SettingPage extends ConsumerWidget {
                   );
                 } else {
                   return SizedBox(
-                      width: size.width/2-20,
+                      width: size.width/2,
                       height: (size.width/2-20)/2,
 
                       child: ElevatedButton(
@@ -112,16 +111,11 @@ class SettingPage extends ConsumerWidget {
                           ),
                         ),
 
-                      child: SizedBox(
-
-                        //color: Colors.white,
-                        width: double.infinity,
-
-                        child: Row(
+                      child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const SizedBox(width: 9),
+                            const SizedBox(width: 4),
                             SvgPicture.asset(
                               "asset/icon/${locations[index - 1].iconName}.svg",
                               width: 30,
@@ -131,16 +125,19 @@ class SettingPage extends ConsumerWidget {
                             const SizedBox(width: 15),
                             Text(
                               locations[index - 1].name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.black,  // ここでテキストの色を設定します
-                                fontSize: 16,        // 任意のフォントサイズ
+                                fontSize: 15,        // 任意のフォントサイズ
                             // その他のTextStyleのプロパティもここで設定できます
                               ),
+
                             )
                           ],
                         ),
                       ),
-                      ),
+
                     );
                 }
               },
