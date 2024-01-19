@@ -16,9 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CleaningListPageState {
-  bool get closeTopContainer => throw _privateConstructorUsedError;
-  double get topContainer => throw _privateConstructorUsedError;
-  double get position => throw _privateConstructorUsedError;
+  List<Location> get locations => throw _privateConstructorUsedError;
   List<Task> get overdueTasks => throw _privateConstructorUsedError;
   List<Task> get todayTasks => throw _privateConstructorUsedError;
   List<Task> get tomorrowTasks => throw _privateConstructorUsedError;
@@ -36,9 +34,7 @@ abstract class $CleaningListPageStateCopyWith<$Res> {
       _$CleaningListPageStateCopyWithImpl<$Res, CleaningListPageState>;
   @useResult
   $Res call(
-      {bool closeTopContainer,
-      double topContainer,
-      double position,
+      {List<Location> locations,
       List<Task> overdueTasks,
       List<Task> todayTasks,
       List<Task> tomorrowTasks,
@@ -59,27 +55,17 @@ class _$CleaningListPageStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? closeTopContainer = null,
-    Object? topContainer = null,
-    Object? position = null,
+    Object? locations = null,
     Object? overdueTasks = null,
     Object? todayTasks = null,
     Object? tomorrowTasks = null,
     Object? threeDaysTasks = null,
   }) {
     return _then(_value.copyWith(
-      closeTopContainer: null == closeTopContainer
-          ? _value.closeTopContainer
-          : closeTopContainer // ignore: cast_nullable_to_non_nullable
-              as bool,
-      topContainer: null == topContainer
-          ? _value.topContainer
-          : topContainer // ignore: cast_nullable_to_non_nullable
-              as double,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as double,
+      locations: null == locations
+          ? _value.locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as List<Location>,
       overdueTasks: null == overdueTasks
           ? _value.overdueTasks
           : overdueTasks // ignore: cast_nullable_to_non_nullable
@@ -110,9 +96,7 @@ abstract class _$$CleaningListPageStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool closeTopContainer,
-      double topContainer,
-      double position,
+      {List<Location> locations,
       List<Task> overdueTasks,
       List<Task> todayTasks,
       List<Task> tomorrowTasks,
@@ -131,27 +115,17 @@ class __$$CleaningListPageStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? closeTopContainer = null,
-    Object? topContainer = null,
-    Object? position = null,
+    Object? locations = null,
     Object? overdueTasks = null,
     Object? todayTasks = null,
     Object? tomorrowTasks = null,
     Object? threeDaysTasks = null,
   }) {
     return _then(_$CleaningListPageStateImpl(
-      closeTopContainer: null == closeTopContainer
-          ? _value.closeTopContainer
-          : closeTopContainer // ignore: cast_nullable_to_non_nullable
-              as bool,
-      topContainer: null == topContainer
-          ? _value.topContainer
-          : topContainer // ignore: cast_nullable_to_non_nullable
-              as double,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as double,
+      locations: null == locations
+          ? _value._locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as List<Location>,
       overdueTasks: null == overdueTasks
           ? _value._overdueTasks
           : overdueTasks // ignore: cast_nullable_to_non_nullable
@@ -176,27 +150,26 @@ class __$$CleaningListPageStateImplCopyWithImpl<$Res>
 
 class _$CleaningListPageStateImpl implements _CleaningListPageState {
   const _$CleaningListPageStateImpl(
-      {this.closeTopContainer = false,
-      this.topContainer = 0.0,
-      this.position = 0.0,
+      {final List<Location> locations = const [],
       final List<Task> overdueTasks = const [],
       final List<Task> todayTasks = const [],
       final List<Task> tomorrowTasks = const [],
       final List<Task> threeDaysTasks = const []})
-      : _overdueTasks = overdueTasks,
+      : _locations = locations,
+        _overdueTasks = overdueTasks,
         _todayTasks = todayTasks,
         _tomorrowTasks = tomorrowTasks,
         _threeDaysTasks = threeDaysTasks;
 
+  final List<Location> _locations;
   @override
   @JsonKey()
-  final bool closeTopContainer;
-  @override
-  @JsonKey()
-  final double topContainer;
-  @override
-  @JsonKey()
-  final double position;
+  List<Location> get locations {
+    if (_locations is EqualUnmodifiableListView) return _locations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_locations);
+  }
+
   final List<Task> _overdueTasks;
   @override
   @JsonKey()
@@ -235,7 +208,7 @@ class _$CleaningListPageStateImpl implements _CleaningListPageState {
 
   @override
   String toString() {
-    return 'CleaningListPageState(closeTopContainer: $closeTopContainer, topContainer: $topContainer, position: $position, overdueTasks: $overdueTasks, todayTasks: $todayTasks, tomorrowTasks: $tomorrowTasks, threeDaysTasks: $threeDaysTasks)';
+    return 'CleaningListPageState(locations: $locations, overdueTasks: $overdueTasks, todayTasks: $todayTasks, tomorrowTasks: $tomorrowTasks, threeDaysTasks: $threeDaysTasks)';
   }
 
   @override
@@ -243,12 +216,8 @@ class _$CleaningListPageStateImpl implements _CleaningListPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CleaningListPageStateImpl &&
-            (identical(other.closeTopContainer, closeTopContainer) ||
-                other.closeTopContainer == closeTopContainer) &&
-            (identical(other.topContainer, topContainer) ||
-                other.topContainer == topContainer) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
+            const DeepCollectionEquality()
+                .equals(other._locations, _locations) &&
             const DeepCollectionEquality()
                 .equals(other._overdueTasks, _overdueTasks) &&
             const DeepCollectionEquality()
@@ -262,9 +231,7 @@ class _$CleaningListPageStateImpl implements _CleaningListPageState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      closeTopContainer,
-      topContainer,
-      position,
+      const DeepCollectionEquality().hash(_locations),
       const DeepCollectionEquality().hash(_overdueTasks),
       const DeepCollectionEquality().hash(_todayTasks),
       const DeepCollectionEquality().hash(_tomorrowTasks),
@@ -280,20 +247,14 @@ class _$CleaningListPageStateImpl implements _CleaningListPageState {
 
 abstract class _CleaningListPageState implements CleaningListPageState {
   const factory _CleaningListPageState(
-      {final bool closeTopContainer,
-      final double topContainer,
-      final double position,
+      {final List<Location> locations,
       final List<Task> overdueTasks,
       final List<Task> todayTasks,
       final List<Task> tomorrowTasks,
       final List<Task> threeDaysTasks}) = _$CleaningListPageStateImpl;
 
   @override
-  bool get closeTopContainer;
-  @override
-  double get topContainer;
-  @override
-  double get position;
+  List<Location> get locations;
   @override
   List<Task> get overdueTasks;
   @override

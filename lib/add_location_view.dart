@@ -18,7 +18,6 @@ class AddLocationView extends ConsumerWidget{
 
     final Size size = MediaQuery.of(context).size;
     final controller = ref.watch(pageProvider);
-    final String taskName = ref.watch(locationNameProvider);
     return GestureDetector(
 
       behavior: HitTestBehavior.opaque,
@@ -55,7 +54,7 @@ class AddLocationView extends ConsumerWidget{
             ],
           )
       ),
-    );;
+    );
   }
 }
 
@@ -104,7 +103,7 @@ class SelectSvgView extends ConsumerWidget {
         spacing: 4.0,
         runSpacing: 4.0,
         children: List.generate(svgList.length, (index){
-          return Container(
+          return SizedBox(
             width: 50,
             height: 50,
             child: TextButton(
