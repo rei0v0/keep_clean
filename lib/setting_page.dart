@@ -3,11 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keep_clean/add_location_view.dart';
-import 'package:keep_clean/main.dart';
-import 'package:keep_clean/add_task_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:convert';
-import 'package:keep_clean/model/task.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_clean/registration_list_page.dart';
 import 'model/location.dart';
@@ -23,11 +18,13 @@ class SettingPage extends ConsumerWidget {
   @override
 
   Widget build(BuildContext context, WidgetRef ref) {
-    //final count = ref.watch(countProvider);
+
     final locations = ref.watch(settingPageProvider);
     final Size size = MediaQuery.of(context).size;
+
     final buttonsize_x=size.width/2-10;
     final buttonsize_y=buttonsize_x/2;
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SizedBox(
@@ -54,14 +51,17 @@ class SettingPage extends ConsumerWidget {
                               isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
-                            return AddLocationView();
+
+                            return const AddLocationView();
+
                               }
                               );
                           if(result != null){
                             final location = Location(name: result["name"],iconName: result["iconName"]);
                             ref.read(settingPageProvider.notifier).addLocation(location);
                             ref.read(settingPageProvider.notifier).roadData();
-                          };
+                          }
+
                         },
                         style: ElevatedButton.styleFrom(
                           textStyle:  const TextStyle(
@@ -76,13 +76,7 @@ class SettingPage extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
-
-
-                      child : Container(
-
-                        child: const Center(child: Icon(Icons.add,size: 50,color: Colors.black54)),
-
-                      )
+                      child : const Center(child: Icon(Icons.add,size: 50,color: Colors.orangeAccent))
                     ),
                   );
                 } else {
@@ -94,7 +88,7 @@ class SettingPage extends ConsumerWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => RegistrationListPage(locations[index - 1].name, locations[index - 1].id ?? 1)),
+                          MaterialPageRoute(builder: (context) => RegistrationListPage(locations[index - 1])),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -123,16 +117,18 @@ class SettingPage extends ConsumerWidget {
                               colorFilter: const ColorFilter.mode(Colors.lightBlueAccent, BlendMode.srcIn),
                             ),
                             const SizedBox(width: 15),
-                            Text(
-                              locations[index - 1].name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.black,  // ここでテキストの色を設定します
-                                fontSize: 15,        // 任意のフォントサイズ
-                            // その他のTextStyleのプロパティもここで設定できます
+                            Expanded(
+                              child: Text(
+                                locations[index - 1].name,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Colors.black,  // ここでテキストの色を設定します
+                                  fontSize: 15,        // 任意のフォントサイズ
+                              // その他のTextStyleのプロパティもここで設定できます
+                                ),
+                              
                               ),
-
                             )
                           ],
                         ),
