@@ -328,8 +328,8 @@ class RegistrationListPage extends ConsumerWidget {
                 color: Colors.orangeAccent,
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Center(
-                child: Text("${location.name}を削除する",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),
+              child: const Center(
+                child: Text("全てを削除する",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),
               ),
             ),
           ),
