@@ -96,7 +96,7 @@ class SelectSvgView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final int selectedSvg = ref.watch(svgProvider);
-    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","bench","book","broom","bucket","bulb","can","can_2","cardboard","door","dustbin","fork_spoon","garbagebag","glove","hotpot","hotpot2","house","house2","house3","hunger","kitchen","laundrydetergent","mop","petbottle","sofa","sofa_2","spray","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3","tree"];
+    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","bench","book","broom","bucket","bulb","can","can_2","cardboard","door","dustbin","fork_spoon","garbagebag","glove","hotpot","hotpot2","hunger","house","house2","house3","kitchen","laundrydetergent","mop","petbottle","sofa","sofa_2","spray","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3","tree"];
 
     return Center(
       child: Wrap(
@@ -146,7 +146,7 @@ class AddButton extends ConsumerWidget {
     final pageIndex = ref.watch(indexProvider);
     final String locationName = ref.watch(locationNameProvider);
     final int selectedSvg = ref.watch(svgProvider);
-    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","bench","book","broom","bucket","bulb","can","can_2","cardboard","door","dustbin","fork_spoon","garbagebag","glove","hotpot","hotpot2","house","house2","house3","hunger","kitchen","laundrydetergent","mop","petbottle","sofa","sofa_2","spray","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3","tree"];
+    final List<String> svgList = ["bathtub","bathtub2","bathtub3","bed","bed2","bench","book","broom","bucket","bulb","can","can_2","cardboard","door","dustbin","fork_spoon","garbagebag","glove","hotpot","hotpot2","hunger","house","house2","house3","kitchen","laundrydetergent","mop","petbottle","sofa","sofa_2","spray","toilet","toilet2","toilet3","washing_machine","washing_machine2","washing_machine3","tree"];
 
 
     return Row(
